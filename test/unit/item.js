@@ -57,6 +57,27 @@ describe('Item', function(){
         });
       });
     });
+    it('should find the objects matching the search term', function(done){
+      var tv = new Item('tv', 'living room', '2/19/2013', '1', '900');
+      var hat = new Item('hat', 'closet', '4/29/2013', '1', '20');
+
+      tv.save(function(){
+        hat.save(function(){
+          Item.find({name:'tv'}, function(items){
+            expect(items).to.have.length(1);
+            done();
+          });
+        });
+      });
+    });
   });
+  describe('#value', function(){
+    it('should return the total value of an item', function(){
+      var tv = new Item('tv', 'living room', '2/19/2013', '1', '900');
+
+      expect(tv.value()).to.equal(900);
+    });
+  });
+
 
 });

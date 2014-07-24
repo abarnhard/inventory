@@ -17,6 +17,10 @@ Item.prototype.save = function(cb){
   });
 };
 
+Item.prototype.value = function(){
+  return this.count * this.cost;
+};
+
 Item.find = function(query, cb){
   cItem.find(query).toArray(function(err, items){
     cb(items);
