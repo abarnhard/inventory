@@ -43,5 +43,20 @@ describe('Item', function(){
       });
     });
   });
+  describe('.find', function(){
+    it('should find all objects in the dbase collection', function(done){
+      var tv = new Item('tv', 'living room', '2/19/2013', '1', '900');
+      var hat = new Item('hat', 'closet', '4/29/2013', '1', '20');
+
+      tv.save(function(){
+        hat.save(function(){
+          Item.find({}, function(items){
+            expect(items).to.have.length(2);
+            done();
+          });
+        });
+      });
+    });
+  });
 
 });
